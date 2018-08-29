@@ -22,4 +22,15 @@ export class ClienteService {
         ${API_CONFIG.baseUrl}/cliente/email?value=${email}`,
         {'headers' : authHeader});
     }
+
+    insert(obj : ClienteDTO) {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/cliente`, 
+            obj,
+            { 
+                observe: 'response', 
+                responseType: 'text'
+            }
+        ); 
+    }
 }
