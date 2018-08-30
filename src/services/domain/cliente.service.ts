@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs/Rx";
 import { ClienteDTO } from "../../models/cliente.dto";
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
@@ -13,14 +12,8 @@ export class ClienteService {
 
     }
 
-    findByEmail(email : string) : Observable<ClienteDTO>{
-
-        let token = this.storage.getLocalUser().token;
-        let authHeader = new HttpHeaders({'Authorization' : 'Bearer '+ token});
-
-        return this.http.get<ClienteDTO>(`
-        ${API_CONFIG.baseUrl}/cliente/email?value=${email}`,
-        {'headers' : authHeader});
+    findByEmail(email: string) {
+        return this.http.get(`${API_CONFIG.baseUrl}/cliente/email?value=${email}`);
     }
 
     insert(obj : ClienteDTO) {
